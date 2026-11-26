@@ -1,0 +1,14 @@
+import { Router } from "express";
+import rateLimit from "express-rate-limit";
+import { requireAuth, requireRole } from "../../middleware/auth.middleware";
+import { validateBody } from "../../middleware/validate.middleware";
+import { changePasswordSchema, loginSchema, resetPasswordSchema } from "./auth.schema";
+import { authController } from "./auth.controller";
+const router = Router();
+const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 20, standardHeaders: true, legacyHeaders: false, message: { code: "RATE_LIMITED", message: "Too many login attempts. Try again later." } });
+router.post("/login", loginLimiter, validateBody(loginSchema), authController.login);
+router.get("/me", requireAuth, authController.me);
+router.post("/logout", requireAuth, authController.logout);
+router.post("/change-password", requireAuth, validateBody(changePasswordSchema), authController.changePassword);
+router.post("/reset-password", requireAuth, requireRole("admin"), validateBody(resetPasswordSchema), authController.resetPassword);
+export default router;

@@ -1,0 +1,10 @@
+﻿const fs = require("fs"); const path = require("path");
+const ctrlPath = path.join(process.cwd(), "server/src/controllers/academic.controller.ts");
+const routePath = path.join(process.cwd(), "server/src/routes/academic.routes.ts");
+let ctrl = fs.readFileSync(ctrlPath, "utf8");
+ctrl = ctrl.replace("../database/knex", "../config/db");
+fs.writeFileSync(ctrlPath, ctrl, "utf8");
+let r = fs.readFileSync(routePath, "utf8");
+r = r.replace("../middleware/role.middleware", "../middleware/auth.middleware");
+fs.writeFileSync(routePath, r, "utf8");
+console.log("Updated imports");

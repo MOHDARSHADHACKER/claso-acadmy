@@ -1,0 +1,1 @@
+﻿const fs = require("fs"); const path = require("path"); const p = path.join(process.cwd(), "client/src/vite-env.d.ts"); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, "/// <reference types=\"vite/client\" />\n", "utf8"); console.log("Created client/src/vite-env.d.ts");
