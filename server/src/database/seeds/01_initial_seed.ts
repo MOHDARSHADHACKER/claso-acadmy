@@ -8,15 +8,19 @@ export async function seed(knex: Knex): Promise<void> {
   const adminPwHash = await bcrypt.hash("Admin@123", 12);
   const userPwHash = await bcrypt.hash("Claso@123", 12);
 
-  const [adminId] = await knex("users").insert({
-    role: "admin",
-    name: "Principal Admin",
-    email: "admin@claso.local",
-    phone: "9800000000",
-    password_hash: adminPwHash,
-    is_active: true,
-    must_change_pw: true,
-  });
+  const [adminRow] = await knex("users")
+    .insert({
+      role: "admin",
+      name: "Principal Admin",
+      email: "admin@claso.local",
+      phone: "9800000000",
+      password_hash: adminPwHash,
+      is_active: true,
+      must_change_pw: true,
+    })
+    .returning("id");
+
+  const adminId = typeof adminRow === "object" ? adminRow.id : adminRow;
 
   await knex("settings").insert({
     centre_name: "Claso Academy",
@@ -26,10 +30,21 @@ export async function seed(knex: Knex): Promise<void> {
     daily_doubt_limit: 5,
   });
 
-  const [course10] = await knex("courses").insert({ name: "Foundation Class 10", description: "Board & Olympiad prep" });
-  const [courseJee] = await knex("courses").insert({ name: "JEE Target", description: "Physics, Chemistry, Maths" });
-  const [courseNeet] = await knex("courses").insert({ name: "NEET Target", description: "Physics, Chemistry, Biology" });
+  const [c10Row] = await knex("courses")
+    .insert({ name: "Foundation Class 10", description: "Board & Olympiad prep" })
+    .returning("id");
+  const [cJeeRow] = await knex("courses")
+    .insert({ name: "JEE Target", description: "Physics, Chemistry, Maths" })
+    .returning("id");
+  const [cNeetRow] = await knex("courses")
+    .insert({ name: "NEET Target", description: "Physics, Chemistry, Biology" })
+    .returning("id");
 
+  const course10 = typeof c10Row === "object" ? c10Row.id : c10Row;
+  const courseJee = typeof cJeeRow === "object" ? cJeeRow.id : cJeeRow;
+  const courseNeet = typeof cNeetRow === "object" ? cNeetRow.id : cNeetRow;
+
+  // Baaki neeche ka seed code (jahan adminId, course10, courseJee, courseNeet use ho rahe hain)
   const batchRows = [
     { course_id: course10, name: "Batch A1 - Class 10", timings: "04:00 PM - 06:00 PM" },
     { course_id: courseJee, name: "Batch J1 - JEE XI", timings: "07:30 AM - 10:00 AM" },
