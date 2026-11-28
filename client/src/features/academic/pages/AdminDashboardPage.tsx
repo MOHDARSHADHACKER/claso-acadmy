@@ -1350,7 +1350,7 @@ export const AdminDashboardPage: React.FC = () => {
                     <p className="text-xs text-slate-500">Schedule and inspect weekly classes by day and batch</p>
                   </div>
                   <select
-                    className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 focus:border-indigo-500 focus:outline-none"
+                    className="rounded-lg border border-slate-300 bg-white py-1.5 text-xs font-semibold text-slate-700 focus:border-indigo-500 focus:outline-none"
                     value={timetableBatchFilter}
                     onChange={(e) => setTimetableBatchFilter(e.target.value)}
                   >
