@@ -581,7 +581,27 @@ export const AdminDashboardPage: React.FC = () => {
                         value={guardianName}
                         onChange={(e) => setGuardianName(e.target.value)}
                       />
+
                       <Input
+  placeholder="Guardian phone"
+  value={guardianPhone}
+  onChange={(e) => setGuardianPhone(e.target.value)}
+  autoComplete="tel"
+  required
+/>
+<Input
+  type="password"
+  placeholder="Password (default Claso@123)"
+  value={studentPassword}
+  onChange={(e) => setStudentPassword(e.target.value)}
+  autoComplete="new-password"
+/>
+<div className="sm:col-span-2 lg:col-span-3">
+  <Button type="submit" disabled={createStudentM.isPending}>
+    {createStudentM.isPending ? "Admitting..." : "Admit Student"}
+  </Button>
+</div>
+                      {/* <Input
                         placeholder="Guardian phone"
                         value={guardianPhone}
                         onChange={(e) => setGuardianPhone(e.target.value)}
@@ -596,7 +616,7 @@ export const AdminDashboardPage: React.FC = () => {
                         <Button type="submit" disabled={createStudentM.isPending}>
                           {createStudentM.isPending ? "Admitting..." : "Admit Student"}
                         </Button>
-                      </div>
+                      </div> */}
                     </form>
 
                     <div className="max-h-[420px] overflow-auto rounded-xl border border-slate-200/70">
@@ -688,7 +708,7 @@ export const AdminDashboardPage: React.FC = () => {
                         value={teacherName}
                         onChange={(e) => setTeacherName(e.target.value)}
                       />
-                      <Input
+                      {/* <Input
                         type="email"
                         placeholder="Email (e.g. faculty@claso.local)"
                         value={teacherEmail}
@@ -704,7 +724,33 @@ export const AdminDashboardPage: React.FC = () => {
                         placeholder="Password (default Claso@123)"
                         value={teacherPassword}
                         onChange={(e) => setTeacherPassword(e.target.value)}
-                      />
+                      /> */}
+
+<Input
+  type="email"
+  placeholder="Email (e.g. faculty@claso.local)"
+  value={teacherEmail}
+  onChange={(e) => setTeacherEmail(e.target.value)}
+  autoComplete="off"
+  required
+/>
+<Input
+  placeholder="Phone (optional)"
+  value={teacherPhone}
+  onChange={(e) => setTeacherPhone(e.target.value)}
+  autoComplete="tel"
+/>
+<Input
+  type="text"
+  name="faculty_password_input"
+  placeholder="Password (default Claso@123)"
+  value={teacherPassword}
+  onChange={(e) => setTeacherPassword(e.target.value)}
+  autoComplete="new-password"
+  data-lpignore="true"
+  style={{ WebkitTextSecurity: "disc" } as React.CSSProperties}
+/>
+
                       <div className="sm:col-span-2">
                         <Button type="submit" disabled={createTeacherM.isPending}>
                           {createTeacherM.isPending ? "Saving..." : "Add Teacher"}
