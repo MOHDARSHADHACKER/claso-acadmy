@@ -272,7 +272,7 @@ export const TeacherDashboardPage: React.FC = () => {
 
                 <div className="flex flex-wrap items-center gap-2">
                   <select
-                    className="rounded-lg border border-slate-300 bg-white px-3text-xs font-semibold text-slate-700"
+                    className="rounded-lg border border-slate-300 bg-white px-3 text-xs font-semibold text-slate-700"
                     value={attBatchId}
                     onChange={(e) => setAttBatchId(e.target.value)}
                   >
