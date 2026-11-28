@@ -625,7 +625,7 @@ export const AdminDashboardPage: React.FC = () => {
                               </td>
                               <td className="px-3 py-2.5">
                                 <select
-                                  className="rounded border border-slate-200 bg-white px-2 py-1 text-xs text-slate-700"
+                                  className="rounded border border-slate-200 bg-white py-1 text-xs text-slate-700"
                                   value={s.batch_id ? String(s.batch_id) : ""}
                                   onChange={(e) =>
                                     updateStudentM.mutate({
